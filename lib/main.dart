@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:smartambulance/initialscreens/onboarding.dart';
+import 'login.dart'; // Import the LoginScreen widget from login.dart
 
 void main() {
-  runApp(const MainApp());
+  runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Onboarding(),
+    return MaterialApp(
+      title: 'Login',
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(), // Set the LoginScreen as the home page
     );
   }
 }
