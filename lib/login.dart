@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'otp_verification_screen.dart'; // Add this import
+// import 'otp_verification_screen.dart'; // Add this import
 import 'name.dart'; // Ensure this import is correct
 
 class LoginScreen extends StatelessWidget {
@@ -21,14 +21,9 @@ class LoginScreen extends StatelessWidget {
           children: [
             SizedBox(height: screenHeight * 0.04),
 
-            IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context); // Navigate back to the previous screen
-              },
-            ),
+            // Removed back button
 
-            SizedBox(height: screenHeight * 0.05),
+            SizedBox(height: screenHeight * 0.1),
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
@@ -81,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: screenHeight * 0.11),
+            SizedBox(height: screenHeight * 0.18),
 
             SizedBox(
               width: double.infinity,
@@ -89,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OtpVerificationScreen()),
+                    MaterialPageRoute(builder: (context) => NameScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(

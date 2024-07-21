@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login.dart'; // Import the login.dart file to use LoginScreen
 
 class OtpVerificationScreen extends StatelessWidget {
   @override
@@ -16,7 +17,7 @@ class OtpVerificationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: screenHeight * 0.05),
+            SizedBox(height: screenHeight * 0.04),
 
             Row(
               children: [
@@ -81,24 +82,49 @@ class OtpVerificationScreen extends StatelessWidget {
             ),
             SizedBox(height: screenHeight * 0.01),
 
-            Center(
-              child: GestureDetector(
-                onTap: () {
-                  // Add your resend OTP functionality here
-                },
-                child: Text(
-                  'Resend OTP',
-                  style: TextStyle(
-                    color: Color(0xFF3BA6F3),
-                    fontFamily: 'Roboto',
-                    fontSize: 15.0, // Fixed font size
-                    letterSpacing: -0.41,
-                    decoration: TextDecoration.none,
+            // Row for Resend OTP and Change Number
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Add your resend OTP functionality here
+                    },
+                    child: Text(
+                      'Resend OTP',
+                      style: TextStyle(
+                        color: Color(0xFF3BA6F3),
+                        fontFamily: 'Roboto',
+                        fontSize: 14.0, // Fixed font size
+                        letterSpacing: -0.41,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                    child: Text(
+                      'Change Number',
+                      style: TextStyle(
+                        color: Color(0xFF3BA6F3),
+                        fontFamily: 'Roboto',
+                        fontSize: 14.0, // Fixed font size
+                        letterSpacing: -0.41,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: screenHeight * 0.18),
+            SizedBox(height: screenHeight * 0.25),
 
             SizedBox(
               width: double.infinity,
