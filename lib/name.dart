@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'otp_verification_screen.dart'; // Add this import
-import 'name.dart'; // Ensure this import is correct
+import 'login.dart'; // Ensure this import is correct
 
-class LoginScreen extends StatelessWidget {
+class NameScreen extends StatelessWidget {
+  final TextEditingController nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -20,21 +20,12 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: screenHeight * 0.04),
-
-            IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context); // Navigate back to the previous screen
-              },
-            ),
-
-            SizedBox(height: screenHeight * 0.05),
+            SizedBox(height: screenHeight * 0.1),
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
               child: Text(
-                'Enter Phone number for verification',
+                'Enter Your Name',
                 style: TextStyle(
                   color: Color(0xFF3A3A3A),
                   fontFamily: 'Roboto',
@@ -45,12 +36,12 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: screenHeight * 0.015),
+            SizedBox(height: screenHeight * 0.009),
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
               child: Text(
-                'This number will be used for all kinds of communications. You shall receive an SMS with code for verifications.',
+                'Please enter your name to proceed, This information will be used henceforth for communication purposes.',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: isLandscape ? screenWidth * 0.014 : screenWidth * 0.038,
@@ -60,14 +51,14 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: screenHeight * 0.1),
+            SizedBox(height: screenHeight * 0.111),
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
-              child: IntlPhoneField(
+              child: TextFormField(
+                controller: nameController,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: screenHeight * 0.012),
-                  labelText: '',
+                  labelText: 'Name',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -75,22 +66,20 @@ class LoginScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.0),
                     borderSide: BorderSide(color: Colors.teal),
                   ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0), // Reduced height
                 ),
-                initialCountryCode: 'IN',
-                onChanged: (phone) {
-                  print(phone.completeNumber);
-                },
               ),
             ),
-            SizedBox(height: screenHeight * 0.11),
+            SizedBox(height: screenHeight * 0.21),
 
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
+                  // Navigate to LoginScreen and pass the name if needed
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OtpVerificationScreen()),
+                    MaterialPageRoute(builder: (context) => LoginScreen()), // Assuming LoginScreen is in login.dart
                   );
                 },
                 style: ElevatedButton.styleFrom(

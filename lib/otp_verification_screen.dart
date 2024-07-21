@@ -100,7 +100,7 @@ class OtpVerificationScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.13),
+              SizedBox(height: screenHeight * 0.18),
 
               SizedBox(
                 width: double.infinity,
