@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login.dart'; // Ensure this import is correct
+import 'package:smartambulance/initialscreens/Login/location.dart';
 
 class NameScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
@@ -78,7 +78,7 @@ class NameScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              LoginScreen()), // Assuming LoginScreen is in login.dart
+                              Location()), // Assuming LoginScreen is in login.dart
                     );
                   },
                   style: ElevatedButton.styleFrom(

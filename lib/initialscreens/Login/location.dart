@@ -1,8 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'otp_verification_screen.dart'; // Add this import
+// import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:geocoding/geocoding.dart';
+// import 'package:geolocator/geolocator.dart';
+import 'login.dart';
 
-class LoginScreen extends StatelessWidget {
+class Location extends StatefulWidget {
+  @override
+  State<Location> createState() => _LocationState();
+}
+
+class _LocationState extends State<Location> {
+  TextEditingController locationController = TextEditingController();
+  String currentLocation = '';
+
+  // Position? userposition;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _findLocation();
+  // }
+
+  // Future<Position?> _findLocation() async {
+  //   bool serviceEnabled;
+  //   LocationPermission permission;
+
+  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     Fluttertoast.showToast(msg: 'Please keep your location On.');
+  //   }
+  //   permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     //again denies one more time ask
+  //     permission = await Geolocator.requestPermission();
+
+  //     if (permission == LocationPermission.denied) {
+  //       Fluttertoast.showToast(msg: 'Location permission denied.');
+  //     }
+  //   }
+  //   if (permission == LocationPermission.deniedForever) {
+  //     Fluttertoast.showToast(msg: 'Location permission denied forever.');
+  //   }
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+
+  //   try {
+  //     List<Placemark> placemarks =
+  //         await placemarkFromCoordinates(position.latitude, position.longitude);
+  //     Placemark place = placemarks[0];
+  //     setState(() {
+  //       userposition = position;
+  //       currentLocation =
+  //           "${place.locality},${place.postalCode},${place.country}";
+  //       locationController.text = currentLocation;
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -19,19 +75,18 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: screenHeight * 0.04),
+              SizedBox(height: screenHeight * 0.05),
               IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.black),
+                icon: Icon(Icons.arrow_back),
                 onPressed: () {
-                  Navigator.pop(
-                      context); // Navigate back to the previous screen
+                  Navigator.pop(context);
                 },
               ),
-              SizedBox(height: screenHeight * 0.05),
+              SizedBox(height: screenHeight * 0.04),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
-                  'Enter Phone number for verification',
+                  'Enter Your Location',
                   style: TextStyle(
                     color: Color(0xFF3A3A3A),
                     fontFamily: 'Roboto',
@@ -42,11 +97,11 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.015),
+              SizedBox(height: screenHeight * 0.009),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
-                  'This number will be used for all kinds of communications. You shall receive an SMS with code for verifications.',
+                  "Please share your location with us. This information is crucial for providing accurate and relevant services.",
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 16.0, // Fixed font size
@@ -56,14 +111,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.1),
+              SizedBox(height: screenHeight * 0.111),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
-                child: IntlPhoneField(
+                child: TextFormField(
+                  controller: locationController,
                   decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: screenHeight * 0.012),
-                    labelText: '',
+                    labelText: 'Location',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -71,22 +125,23 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                       borderSide: BorderSide(color: Colors.teal),
                     ),
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0), // Reduced height
                   ),
-                  initialCountryCode: 'IN',
-                  onChanged: (phone) {
-                    print(phone.completeNumber);
-                  },
                 ),
               ),
-              SizedBox(height: screenHeight * 0.11),
+              SizedBox(height: screenHeight * 0.21),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Navigate to LoginScreen and pass the name if needed
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => OtpVerificationScreen()),
+                          builder: (context) =>
+                              LoginScreen()), // Assuming LoginScreen is in login.dart
                     );
                   },
                   style: ElevatedButton.styleFrom(
