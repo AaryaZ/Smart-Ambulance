@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login.dart'; // Import the LoginScreen widget from login.dart
+import 'name.dart'; // Import the NameScreen widget from name.dart
 
 void main() {
   runApp(MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(), // Set the LoginScreen as the home page
+      home: NameScreen(), // Set the NameScreen as the home page
     );
   }
 }
