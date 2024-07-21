@@ -8,7 +8,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -38,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Color(0xFF3A3A3A),
                   fontFamily: 'Roboto',
-                  fontSize: 25.0,
+                  fontSize: 25.0, // Fixed font size
                   fontWeight: FontWeight.w600,
                   letterSpacing: -0.41,
                   height: 1.1,
@@ -53,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                 'This number will be used for all kinds of communications. You shall receive an SMS with code for verifications.',
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: isLandscape ? screenWidth * 0.014 : screenWidth * 0.038,
+                  fontSize: 16.0, // Fixed font size
                   color: Colors.grey,
                   letterSpacing: -0.41,
                   height: 1.4,
@@ -104,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                   'NEXT',
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: screenWidth * 0.037,
+                    fontSize: 16.0, // Fixed font size
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                     letterSpacing: -0.41,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'name.dart'; // Import the NameScreen widget from name.dart
+import 'splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,12 +9,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login',
+      title: 'Smart Ambulance',
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
       debugShowCheckedModeBanner: false,
-      home: NameScreen(), // Set the NameScreen as the home page
+      home: SplashScreen(),
     );
   }
 }
