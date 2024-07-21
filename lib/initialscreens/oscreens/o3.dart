@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class O3 extends StatelessWidget {
   const O3({super.key});
@@ -19,11 +18,15 @@ class O3 extends StatelessWidget {
                     Image.asset('assets/onboarding/o3.png'),
                     const SizedBox(height: 13),
                     // const SizedBox(height: 10),
-                    Text(
+                    const Text(
                       "Smart Ambulance: fast response, real-time tracking, and advanced diagnostics for critical care and quick services.",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16.0, // Fixed font size
+                        color: Colors.grey,
+                        letterSpacing: -0.41,
+                        height: 1.4,
                       ),
                     ),
                     const SizedBox(height: 100),

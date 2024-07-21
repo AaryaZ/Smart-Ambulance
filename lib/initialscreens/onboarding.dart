@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartambulance/initialscreens/l.dart';
+import 'package:smartambulance/initialscreens/Login/name.dart';
 import 'package:smartambulance/initialscreens/oscreens/o1.dart';
 import 'package:smartambulance/initialscreens/oscreens/o2.dart';
 import 'package:smartambulance/initialscreens/oscreens/o3.dart';
@@ -58,9 +58,15 @@ class _OnboardingState extends State<Onboarding> {
                 ),
                 GestureDetector(
                     onTap: () {
-                      _controller.nextPage(
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.easeInOutCirc);
+                      getstartedPage
+                          ? Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NameScreen()),
+                              (route) => false)
+                          : _controller.nextPage(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOutCirc);
                     },
                     child: getstartedPage
                         ? Container(
@@ -110,7 +116,8 @@ class _OnboardingState extends State<Onboarding> {
                         onTap: () {
                           Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => L()),
+                              MaterialPageRoute(
+                                  builder: (context) => NameScreen()),
                               (route) => false);
                           // _controller.jumpToPage(2);
                         },
