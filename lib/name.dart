@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'login.dart'; // Import the LoginScreen
 import 'otp_verification_screen.dart'; // Import the OtpVerificationScreen
 
 class NameScreen extends StatefulWidget {
+  final String phoneNumber; // Add phoneNumber as a required parameter
+
+  NameScreen({required this.phoneNumber}); // Constructor to receive phoneNumber
+
   @override
   _NameScreenState createState() => _NameScreenState();
 }
@@ -182,7 +185,9 @@ class _NameScreenState extends State<NameScreen> {
                         if (_formKey.currentState != null && _formKey.currentState!.validate()) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => OtpVerificationScreen()),
+                            MaterialPageRoute(
+                              builder: (context) => OtpVerificationScreen(phoneNumber: widget.phoneNumber),
+                            ),
                           );
                         }
                       }

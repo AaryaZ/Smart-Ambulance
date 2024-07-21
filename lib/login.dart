@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-// import 'otp_verification_screen.dart'; // Add this import
-import 'name.dart'; // Ensure this import is correct
+import 'name.dart'; // Import the name.dart file
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String phoneNumber = ''; // Variable to store the phone number
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -72,7 +78,9 @@ class LoginScreen extends StatelessWidget {
                 ),
                 initialCountryCode: 'IN',
                 onChanged: (phone) {
-                  print(phone.completeNumber);
+                  setState(() {
+                    phoneNumber = phone.completeNumber; // Update the phone number
+                  });
                 },
               ),
             ),
@@ -82,10 +90,19 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NameScreen()),
-                  );
+                  if (phoneNumber.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NameScreen(phoneNumber: phoneNumber),
+                      ),
+                    );
+                  } else {
+                    // Show an error message or handle empty phone number
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please enter a phone number')),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF1D7C76),

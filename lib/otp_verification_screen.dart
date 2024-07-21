@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'login.dart'; // Import the login.dart file to use LoginScreen
+import 'login.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
+  final String phoneNumber; // Required parameter
+
+  OtpVerificationScreen({required this.phoneNumber}); // Constructor
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    String lastFiveDigits = phoneNumber.length >= 5 ? phoneNumber.substring(phoneNumber.length - 5) : phoneNumber;
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -49,7 +55,7 @@ class OtpVerificationScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
               child: Text(
-                'Log in using the OTP sent to +xxxxxxxxxx',
+                'Log in using the OTP sent to +${'x' * (phoneNumber.length - 5)}$lastFiveDigits',
                 style: TextStyle(
                   color: Color(0xFF3A3A3A),
                   fontFamily: 'Roboto',
