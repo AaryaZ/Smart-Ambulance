@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:geocoding/geocoding.dart';
-// import 'package:geolocator/geolocator.dart';
-import 'login.dart';
+import 'package:smartambulance/initialscreens/Login/otp_verification_screen.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Location extends StatefulWidget {
+  final String phoneNumber;
+  Location({required this.phoneNumber});
   @override
   State<Location> createState() => _LocationState();
 }
@@ -13,51 +14,60 @@ class _LocationState extends State<Location> {
   TextEditingController locationController = TextEditingController();
   String currentLocation = '';
 
-  // Position? userposition;
+  Position? userposition;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _findLocation();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _findLocation();
+  }
 
-  // Future<Position?> _findLocation() async {
-  //   bool serviceEnabled;
-  //   LocationPermission permission;
+  Future<Position?> _findLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
 
-  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //   if (!serviceEnabled) {
-  //     Fluttertoast.showToast(msg: 'Please keep your location On.');
-  //   }
-  //   permission = await Geolocator.checkPermission();
-  //   if (permission == LocationPermission.denied) {
-  //     //again denies one more time ask
-  //     permission = await Geolocator.requestPermission();
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Fluttertoast.showToast(msg: 'Please keep your location On.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please keep your location On.')),
+      );
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      //again denies one more time ask
+      permission = await Geolocator.requestPermission();
 
-  //     if (permission == LocationPermission.denied) {
-  //       Fluttertoast.showToast(msg: 'Location permission denied.');
-  //     }
-  //   }
-  //   if (permission == LocationPermission.deniedForever) {
-  //     Fluttertoast.showToast(msg: 'Location permission denied forever.');
-  //   }
-  //   Position position = await Geolocator.getCurrentPosition(
-  //       desiredAccuracy: LocationAccuracy.high);
+      if (permission == LocationPermission.denied) {
+        // Fluttertoast.showToast(msg: 'Location permission denied.');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Location permission denied.')),
+        );
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      // Fluttertoast.showToast(msg: 'Location permission denied forever.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Location permission denied forever.')),
+      );
+    }
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
 
-  //   try {
-  //     List<Placemark> placemarks =
-  //         await placemarkFromCoordinates(position.latitude, position.longitude);
-  //     Placemark place = placemarks[0];
-  //     setState(() {
-  //       userposition = position;
-  //       currentLocation =
-  //           "${place.locality},${place.postalCode},${place.country}";
-  //       locationController.text = currentLocation;
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      Placemark place = placemarks[0];
+      setState(() {
+        userposition = position;
+        currentLocation =
+            "${place.locality},${place.postalCode},${place.country}";
+        locationController.text = currentLocation;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,13 +145,12 @@ class _LocationState extends State<Location> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigate to LoginScreen and pass the name if needed
-
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              LoginScreen()), // Assuming LoginScreen is in login.dart
+                        builder: (context) => OtpVerificationScreen(
+                            phoneNumber: widget.phoneNumber),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(

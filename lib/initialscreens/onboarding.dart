@@ -125,7 +125,11 @@ class _OnboardingState extends State<Onboarding> {
                           width: GlobalWidth * 0.9,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: LTheme.secondaryGreen,
+                            color: Colors.transparent,
+                            border: Border.all(
+                              color: LTheme.secondaryGreen,
+                              width: 2.0,
+                            ),
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: Text(

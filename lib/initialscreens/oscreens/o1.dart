@@ -28,15 +28,18 @@ class O1 extends StatelessWidget {
                           color: LTheme.primaryGreen),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                      "Smart Ambulance app enhances emergency response with real-time tracking, advanced diagnostics, and optimized routes.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 16.0, // Fixed font size
-                        color: Colors.grey,
-                        letterSpacing: -0.41,
-                        height: 1.4,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: const Text(
+                        "Smart Ambulance app enhances emergency response with real-time tracking, advanced diagnostics, and optimized routes.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 16.0, // Fixed font size
+                          color: Colors.grey,
+                          letterSpacing: -0.41,
+                          height: 1.4,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 100),

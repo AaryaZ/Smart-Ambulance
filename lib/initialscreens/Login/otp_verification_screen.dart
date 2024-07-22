@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:smartambulance/initialscreens/Home/navbar.dart';
+import 'package:flutter/widgets.dart';
+import 'package:pinput/pinput.dart';
+import 'package:smartambulance/initialscreens/Login/login.dart';
+import 'package:smartambulance/initialscreens/Login/name.dart';
+import 'package:smartambulance/themes/theme.dart';
 
-class OtpVerificationScreen extends StatelessWidget {
+class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber; // Required parameter
 
-  OtpVerificationScreen({required this.phoneNumber}); // Constructor
+  OtpVerificationScreen({required this.phoneNumber});
+  @override
+  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
+}
 
+class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  // Constructor
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    String? otpCode;
+    int otplength = 0;
 
-    String lastFiveDigits = phoneNumber.length >= 5
-        ? phoneNumber.substring(phoneNumber.length - 5)
-        : phoneNumber;
+    String lastFiveDigits = widget.phoneNumber.length >= 5
+        ? widget.phoneNumber.substring(widget.phoneNumber.length - 5)
+        : widget.phoneNumber;
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -58,7 +70,7 @@ class OtpVerificationScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
-                  'Log in using the OTP sent to +${'x' * (phoneNumber.length - 5)}$lastFiveDigits',
+                  'Log in using the OTP sent to +${'x' * (widget.phoneNumber.length - 5)}$lastFiveDigits',
                   style: TextStyle(
                     color: Color(0xFF3A3A3A),
                     fontFamily: 'Roboto',
@@ -72,31 +84,55 @@ class OtpVerificationScreen extends StatelessWidget {
               SizedBox(height: screenHeight * 0.11),
 
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: screenHeight * 0.012),
-                    labelText: '',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
+                child: Pinput(
+                  length: 4,
+                  defaultPinTheme: PinTheme(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      border: Border.all(color: LTheme.primaryGreen),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(color: Colors.teal),
-                    ),
+                    textStyle: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w600),
                   ),
-                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    setState(() {
+                      otpCode = value;
+                    });
+                  },
                 ),
               ),
+
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
+              //   child: TextField(
+              //     keyboardType: TextInputType.number,
+              //     decoration: InputDecoration(
+              //       contentPadding:
+              //           EdgeInsets.symmetric(vertical: screenHeight * 0.012),
+              //       labelText: '',
+              //       border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(5.0),
+              //       ),
+              //       focusedBorder: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(5.0),
+              //         borderSide: BorderSide(color: Colors.teal),
+              //       ),
+              //     ),
+              //     textAlign: TextAlign.center,
+              //   ),
+              // ),
               SizedBox(height: screenHeight * 0.01),
 
               // Row for Resend OTP and Change Number
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.3),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -115,11 +151,11 @@ class OtpVerificationScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => LoginScreen()),
+                        // );
                       },
                       child: Text(
                         'Change Number',
@@ -141,7 +177,10 @@ class OtpVerificationScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Add your OTP submission functionality here
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => BottomNav()),
+                        (route) => false);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF1D7C76),

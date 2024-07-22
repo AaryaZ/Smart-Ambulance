@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'otp_verification_screen.dart'; // Import the OtpVerificationScreen
+import 'package:smartambulance/initialscreens/Login/location.dart';
 
 class NameScreen extends StatefulWidget {
   final String phoneNumber; // Add phoneNumber as a required parameter
@@ -198,8 +198,8 @@ class _NameScreenState extends State<NameScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => OtpVerificationScreen(
-                                    phoneNumber: widget.phoneNumber),
+                                builder: (context) =>
+                                    Location(phoneNumber: widget.phoneNumber),
                               ),
                             );
                           }
