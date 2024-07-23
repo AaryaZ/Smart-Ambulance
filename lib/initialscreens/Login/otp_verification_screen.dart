@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartambulance/initialscreens/Home/navbar.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pinput/pinput.dart';
-import 'package:smartambulance/initialscreens/Login/login.dart';
-import 'package:smartambulance/initialscreens/Login/name.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
