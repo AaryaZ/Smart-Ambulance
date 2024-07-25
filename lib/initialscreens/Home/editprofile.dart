@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartambulance/initialscreens/Home/editprofile.dart';
 import 'package:smartambulance/themes/theme.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class Editprofile extends StatefulWidget {
+  const Editprofile({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<Editprofile> createState() => _EditprofileState();
 }
 
-class _ProfileState extends State<Profile> {
-  final Map<String, String> profiledata = {
+class _EditprofileState extends State<Editprofile> {
+  final Map<String, String> editprofiledata = {
     "Name": "Arjun Karl",
-    "mobile": "77389456210",
     "password": "Arjun@123",
-    "treq": "3"
   };
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,23 @@ class _ProfileState extends State<Profile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 110,
+              height: 80,
+            ),
+            Align(
+              alignment: Alignment(-1, -0.8),
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: const Icon(
+                  Icons.arrow_back_rounded,
+                  color: LTheme.primaryGreen,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
             ),
             Text(
-              "   User Profile",
+              "  Edit Profile",
               style: TextStyle(
                   color: LTheme.primaryGreen,
                   fontSize: 25,
@@ -41,15 +51,11 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 children: [
                   const SizedBox(height: 20.0),
-                  _buildInfoField({"Name": profiledata["Name"] ?? ''}),
-                  const SizedBox(height: 10.0),
-                  _buildInfoField({"Mobile No.": profiledata['mobile'] ?? ''}),
-                  const SizedBox(height: 10.0),
-                  _buildInfoField({"Password": profiledata['password'] ?? ''}),
+                  _buildInfoField({"Name": editprofiledata["Name"] ?? ''}),
                   const SizedBox(height: 10.0),
                   _buildInfoField(
-                      {"Total Number of Requests": profiledata['treq'] ?? ''}),
-                  const SizedBox(height: 50.0),
+                      {"Password": editprofiledata['password'] ?? ''}),
+                  const SizedBox(height: 100.0),
                   GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -66,7 +72,7 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                         child: Text(
-                          "EDIT PROFILE",
+                          "SUBMIT",
                           style: GoogleFonts.inter(
                             color: Colors.white,
                             fontSize: 17,

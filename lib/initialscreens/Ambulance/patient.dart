@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartambulance/initialscreens/Home/editprofile.dart';
 import 'package:smartambulance/themes/theme.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class Patient extends StatefulWidget {
+  const Patient({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<Patient> createState() => _PatientState();
 }
 
-class _ProfileState extends State<Profile> {
-  final Map<String, String> profiledata = {
+class _PatientState extends State<Patient> {
+  final Map<String, String> patientdata = {
     "Name": "Arjun Karl",
     "mobile": "77389456210",
-    "password": "Arjun@123",
-    "treq": "3"
+    "altmobile": "9234567890",
+    "hname": "St. Vincent's Hospital",
+    "hlocation": "St. Vincent's Hospital,A.J Road,Kurla",
+    "PName": "Rohit Sanon",
   };
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _ProfileState extends State<Profile> {
               height: 110,
             ),
             Text(
-              "   User Profile",
+              "Patient Details",
               style: TextStyle(
                   color: LTheme.primaryGreen,
                   fontSize: 25,
@@ -40,22 +41,27 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 children: [
-                  const SizedBox(height: 20.0),
-                  _buildInfoField({"Name": profiledata["Name"] ?? ''}),
+                  _buildInfoField({"Name": patientdata["Name"] ?? ''}),
                   const SizedBox(height: 10.0),
-                  _buildInfoField({"Mobile No.": profiledata['mobile'] ?? ''}),
-                  const SizedBox(height: 10.0),
-                  _buildInfoField({"Password": profiledata['password'] ?? ''}),
+                  _buildInfoField({"Mobile No.": patientdata['mobile'] ?? ''}),
                   const SizedBox(height: 10.0),
                   _buildInfoField(
-                      {"Total Number of Requests": profiledata['treq'] ?? ''}),
-                  const SizedBox(height: 50.0),
+                      {"Alternate Mobile No.": patientdata['altmobile'] ?? ''}),
+                  const SizedBox(height: 10.0),
+                  _buildInfoField(
+                      {"Hospital Name": patientdata['hname'] ?? ''}),
+                  const SizedBox(height: 10.0),
+                  _buildInfoField(
+                      {"Hospital Location": patientdata['hlocation'] ?? ''}),
+                  const SizedBox(height: 10.0),
+                  _buildInfoField(
+                      {"Name of the Patient": patientdata['PName'] ?? ''}),
+                  const SizedBox(height: 30.0),
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Editprofile()));
+                        // _controller.nextPage(
+                        //     duration: Duration(milliseconds: 500),
+                        //     curve: Curves.easeInOutCirc);
                       },
                       child: Container(
                         height: 60,
@@ -66,7 +72,7 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                         child: Text(
-                          "EDIT PROFILE",
+                          "NEXT",
                           style: GoogleFonts.inter(
                             color: Colors.white,
                             fontSize: 17,

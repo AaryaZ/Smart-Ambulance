@@ -29,4 +29,4 @@ flutter:
   assets:
     - assets/onboarding/
     - assets/home/
-    - assets/
+    - assets/payment/
