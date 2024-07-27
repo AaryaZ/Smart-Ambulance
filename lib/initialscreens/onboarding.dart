@@ -17,9 +17,15 @@ class Onboarding extends StatefulWidget {
 class _OnboardingState extends State<Onboarding> {
   PageController _controller = PageController();
   bool getstartedPage = false;
+
+  double getResponsiveFontSize(double baseSize) {
+    return MediaQuery.of(context).size.width / 375 * baseSize;
+  }
+
   @override
   Widget build(BuildContext context) {
     var GlobalWidth = MediaQuery.of(context).size.width;
+    var GlobalHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Stack(
       alignment: Alignment.bottomCenter,
@@ -32,29 +38,29 @@ class _OnboardingState extends State<Onboarding> {
               });
             },
             children: [O1(), O2(), O3()]),
-        Positioned(
-            bottom: 200,
-            child: SmoothPageIndicator(
-              controller: _controller,
-              count: 3,
-              effect: ExpandingDotsEffect(
-                  activeDotColor: LTheme.primaryGreen,
-                  dotColor: LTheme.secondaryGreen,
-                  dotHeight: 12,
-                  dotWidth: 18),
-            )),
-        SizedBox(
-          height: 10,
-        ),
         Container(
-            height: 200,
+            height: GlobalHeight * 0.3,
 
             // color: Colors.amber,
             child: Column(
               children: [
-                SizedBox(
-                  height: 20,
+                Flexible(
+                    child: FractionallySizedBox(
+                  heightFactor: 0.1,
+                )),
+                SmoothPageIndicator(
+                  controller: _controller,
+                  count: 3,
+                  effect: ExpandingDotsEffect(
+                      activeDotColor: LTheme.primaryGreen,
+                      dotColor: LTheme.secondaryGreen,
+                      dotHeight: 12,
+                      dotWidth: 18),
                 ),
+                Flexible(
+                    child: FractionallySizedBox(
+                  heightFactor: 0.5,
+                )),
                 GestureDetector(
                     onTap: () {
                       getstartedPage
@@ -69,7 +75,7 @@ class _OnboardingState extends State<Onboarding> {
                     },
                     child: getstartedPage
                         ? Container(
-                            height: 60,
+                            height: GlobalHeight * 0.08,
                             width: GlobalWidth * 0.9,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -80,14 +86,14 @@ class _OnboardingState extends State<Onboarding> {
                               "GET STARTED",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: getResponsiveFontSize(17),
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,
                               ),
                             ),
                           )
                         : Container(
-                            height: 60,
+                            height: GlobalHeight * 0.08,
                             width: GlobalWidth * 0.9,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -98,15 +104,16 @@ class _OnboardingState extends State<Onboarding> {
                               "NEXT",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: getResponsiveFontSize(17),
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,
                               ),
                             ),
                           )),
-                SizedBox(
-                  height: 15,
-                ),
+                Flexible(
+                    child: FractionallySizedBox(
+                  heightFactor: 0.3,
+                )),
                 getstartedPage
                     ? SizedBox(
                         height: 10,
@@ -121,7 +128,7 @@ class _OnboardingState extends State<Onboarding> {
                           // _controller.jumpToPage(2);
                         },
                         child: Container(
-                          height: 60,
+                          height: GlobalHeight * 0.08,
                           width: GlobalWidth * 0.9,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -136,7 +143,7 @@ class _OnboardingState extends State<Onboarding> {
                             "SKIP",
                             style: GoogleFonts.inter(
                               color: LTheme.primaryGreen,
-                              fontSize: 17,
+                              fontSize: getResponsiveFontSize(17),
                               fontWeight: FontWeight.w600,
                               fontStyle: FontStyle.normal,
                             ),

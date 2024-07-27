@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartambulance/initialscreens/Home/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smartambulance/Home/home.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class Bookeddetails extends StatefulWidget {
@@ -10,10 +11,16 @@ class Bookeddetails extends StatefulWidget {
   State<Bookeddetails> createState() => _BookeddetailsState();
 }
 
+Future<void> saveCurrentBookingData() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('booking_confirmed', true);
+}
+
 class _BookeddetailsState extends State<Bookeddetails> {
   @override
   void initState() {
     super.initState();
+    saveCurrentBookingData();
 
     Future.delayed(Duration(seconds: 5), () {
       Navigator.pushReplacement(
@@ -26,6 +33,10 @@ class _BookeddetailsState extends State<Bookeddetails> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double getResponsiveFontSize(double baseSize) {
+      return MediaQuery.of(context).size.width / 375 * baseSize;
+    }
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 18),
@@ -63,7 +74,7 @@ class _BookeddetailsState extends State<Bookeddetails> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                           color: LTheme.primaryGreen,
-                          fontSize: 20,
+                          fontSize: getResponsiveFontSize(20),
                           fontWeight: FontWeight.w500),
                     )
                   ],
@@ -72,22 +83,25 @@ class _BookeddetailsState extends State<Bookeddetails> {
               SizedBox(height: 10),
               Text("Booking Details",
                   style: GoogleFonts.inter(
-                      fontSize: 22,
+                      fontSize: getResponsiveFontSize(20),
                       fontWeight: FontWeight.w600,
                       color: Colors.grey)),
               SizedBox(height: 10),
               Column(
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "Confirmation Status",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Text("Confirmed",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16))
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)))
                     ],
                   ),
                   SizedBox(height: 8.0),
@@ -96,11 +110,14 @@ class _BookeddetailsState extends State<Bookeddetails> {
                     children: [
                       Text(
                         "Date And Time",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Text("20-07-2024 9:30:00",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16))
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)))
                     ],
                   ),
                   SizedBox(height: 8.0),
@@ -109,11 +126,14 @@ class _BookeddetailsState extends State<Bookeddetails> {
                     children: [
                       Text(
                         "Type",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Text("ECO",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16))
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)))
                     ],
                   ),
                   SizedBox(height: 8.0),
@@ -122,14 +142,17 @@ class _BookeddetailsState extends State<Bookeddetails> {
                     children: [
                       Text(
                         "Pickup At",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Container(
                         width: 200,
                         child: Text(
                           "Mira Road",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16),
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           // textDirection: TextDirection.rtl,
@@ -144,14 +167,17 @@ class _BookeddetailsState extends State<Bookeddetails> {
                     children: [
                       Text(
                         "Drop At",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Container(
                         width: 200,
                         child: Text(
                           "St. Vincent Mira Road Lokhandwala",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16),
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.end,
@@ -166,11 +192,14 @@ class _BookeddetailsState extends State<Bookeddetails> {
                     children: [
                       Text(
                         "Other Charges",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Text("Rs. 0.00",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16))
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)))
                     ],
                   ),
                   SizedBox(height: 8.0),
@@ -179,11 +208,14 @@ class _BookeddetailsState extends State<Bookeddetails> {
                     children: [
                       Text(
                         "Accident Insurance",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Text("Rs. 0.00",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16))
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)))
                     ],
                   ),
                   SizedBox(height: 8.0),
@@ -192,11 +224,14 @@ class _BookeddetailsState extends State<Bookeddetails> {
                     children: [
                       Text(
                         "Total Price",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: getResponsiveFontSize(16)),
                       ),
                       Text("Rs. 1897.57",
                           style: TextStyle(
-                              color: LTheme.primaryGreen, fontSize: 16))
+                              color: LTheme.primaryGreen,
+                              fontSize: getResponsiveFontSize(16)))
                     ],
                   ),
                   SizedBox(height: 8.0),
@@ -207,7 +242,9 @@ class _BookeddetailsState extends State<Bookeddetails> {
                   alignment: Alignment(0, 0.9),
                   child: Text(
                     "Redirecting to home page in 5s",
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: getResponsiveFontSize(12)),
                   )),
             ],
           ),

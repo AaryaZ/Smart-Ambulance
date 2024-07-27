@@ -7,44 +7,52 @@ class O2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double getResponsiveFontSize(double baseSize) {
+      return MediaQuery.of(context).size.width / 375 * baseSize;
+    }
+
+    var GlobalHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/onboarding/o2.png'),
-                    const SizedBox(height: 13),
-                    Text(
-                      "Smart Ambulance",
-                      style: GoogleFonts.inter(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: LTheme.primaryGreen),
-                    ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: const Text(
-                        "Transform emergency care with Smart Ambulance: real-time tracking, quick diagnostics, and efficient routing.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 16.0, // Fixed font size
-                          color: Colors.grey,
-                          letterSpacing: -0.41,
-                          height: 1.4,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 100),
-                  ]),
+        child: Container(
+          height: GlobalHeight * 0.7,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Flexible(
+                child: FractionallySizedBox(
+              heightFactor: 0.4,
+            )),
+            Image.asset('assets/onboarding/o2.png'),
+            Flexible(
+                child: FractionallySizedBox(
+              heightFactor: 0.2,
+            )),
+            Text(
+              "Smart Ambulance",
+              style: GoogleFonts.inter(
+                  fontSize: getResponsiveFontSize(24.0),
+                  fontWeight: FontWeight.w600,
+                  color: LTheme.primaryGreen),
             ),
-          ],
+            Flexible(
+                child: FractionallySizedBox(
+              heightFactor: 0.3,
+            )),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Text(
+                "Transform emergency care with Smart Ambulance: real-time tracking, quick diagnostics, and efficient routing.",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: getResponsiveFontSize(16.0),
+                  color: Colors.grey,
+                  letterSpacing: -0.41,
+                  height: 1.4,
+                ),
+              ),
+            ),
+          ]),
         ),
       ),
     );

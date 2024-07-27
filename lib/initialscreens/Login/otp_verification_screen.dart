@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smartambulance/initialscreens/Home/navbar.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:smartambulance/Home/navbar.dart';
 import 'package:pinput/pinput.dart';
 import 'package:smartambulance/themes/theme.dart';
 
@@ -15,6 +16,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   // Constructor
   @override
   Widget build(BuildContext context) {
+    double getResponsiveFontSize(double baseSize) {
+      return MediaQuery.of(context).size.width / 375 * baseSize;
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     String? otpCode;
@@ -49,9 +54,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   Expanded(
                     child: Text(
                       '', // Empty header text
-                      style: TextStyle(
+                      style: GoogleFonts.inter(
                         color: Color(0xFF3A3A3A),
-                        fontFamily: 'Roboto',
+
                         fontSize: 24.0, // Fixed font size
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.41,
@@ -68,10 +73,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
                   'Log in using the OTP sent to +${'x' * (widget.phoneNumber.length - 5)}$lastFiveDigits',
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     color: Color(0xFF3A3A3A),
-                    fontFamily: 'Roboto',
-                    fontSize: 24.0, // Fixed font size
+
+                    fontSize: getResponsiveFontSize(24), // Fixed font size
                     fontWeight: FontWeight.w600,
                     letterSpacing: -0.41,
                     height: 1.1,
@@ -126,7 +131,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
               // Row for Resend OTP and Change Number
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.3),
+                padding: EdgeInsets.only(left: screenWidth * 0.3),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -137,13 +142,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       },
                       child: Text(
                         'Resend OTP',
-                        style: TextStyle(
+                        style: GoogleFonts.inter(
                           color: Color(0xFF3BA6F3),
-                          fontFamily: 'Roboto',
-                          fontSize: 14.0, // Fixed font size
+
+                          fontSize:
+                              getResponsiveFontSize(14), // Fixed font size
                           letterSpacing: -0.41,
                           decoration: TextDecoration.none,
                         ),
+                        // textAlign: TextAlign.center,
                       ),
                     ),
                     GestureDetector(
@@ -156,13 +163,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       },
                       child: Text(
                         'Change Number',
-                        style: TextStyle(
+                        style: GoogleFonts.inter(
                           color: Color(0xFF3BA6F3),
-                          fontFamily: 'Roboto',
-                          fontSize: 14.0, // Fixed font size
+
+                          fontSize:
+                              getResponsiveFontSize(14), // Fixed font size
                           letterSpacing: -0.41,
                           decoration: TextDecoration.none,
                         ),
+                        maxLines: 1,
                       ),
                     ),
                   ],

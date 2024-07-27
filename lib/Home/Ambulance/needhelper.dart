@@ -3,13 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class NeedHelper extends StatefulWidget {
-  const NeedHelper({super.key});
+  final VoidCallback onNextPage;
+  final VoidCallback onPrevPage;
+
+  NeedHelper({required this.onNextPage, required this.onPrevPage});
 
   @override
   State<NeedHelper> createState() => _NeedHelperState();
 }
 
 class _NeedHelperState extends State<NeedHelper> {
+  int helperrequired = 0;
   bool _isExpanded = false;
   int helper = 2;
 
@@ -28,13 +32,24 @@ class _NeedHelperState extends State<NeedHelper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // backgroundColor: LTheme.sbgcolor,
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () => widget.onPrevPage(),
+          child: const Icon(
+            Icons.arrow_back_rounded,
+            color: LTheme.primaryGreen,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 200,
+              height: 80,
             ),
             Text(
               "Need Helpers?",
@@ -94,7 +109,10 @@ class _NeedHelperState extends State<NeedHelper> {
                               ],
                             ),
                             GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  helperrequired = helper;
+                                  widget.onNextPage();
+                                },
                                 child: Container(
                                   height: 30,
                                   width: 80,
@@ -129,11 +147,17 @@ class _NeedHelperState extends State<NeedHelper> {
                             color: Colors.black54,
                             thickness: 1,
                           ),
-                    const ListTile(
-                      title: Text(
-                        'No',
-                        style:
-                            TextStyle(color: LTheme.primaryGreen, fontSize: 20),
+                    InkWell(
+                      onTap: () {
+                        helperrequired = 0;
+                        widget.onNextPage();
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          'No',
+                          style: TextStyle(
+                              color: LTheme.primaryGreen, fontSize: 20),
+                        ),
                       ),
                     ),
                   ],

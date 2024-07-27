@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartambulance/initialscreens/Booking/bookingdetails.dart';
-import 'package:smartambulance/initialscreens/Home/home.dart';
+import 'package:smartambulance/Home/Booking/bookingdetails.dart';
+import 'package:smartambulance/Home/home.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class NearestAmbulance extends StatefulWidget {
@@ -12,6 +12,10 @@ class NearestAmbulance extends StatefulWidget {
 }
 
 class _NearestAmbulanceState extends State<NearestAmbulance> {
+  double getResponsiveFontSize(double baseSize) {
+    return MediaQuery.of(context).size.width / 375 * baseSize;
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -19,7 +23,6 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
         body: Padding(
       padding: const EdgeInsets.only(left: 25, right: 18),
       child: Container(
-        height: 700,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +47,7 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                 "Hold on Connecting with the\nNearest Ambulance",
                 style: TextStyle(
                     color: LTheme.primaryGreen,
-                    fontSize: 22,
+                    fontSize: getResponsiveFontSize(22),
                     fontWeight: FontWeight.w500),
               ),
               Column(
@@ -60,7 +63,7 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                       _buildInfoField({
                         "Pickup From":
                             "Anton Colony, GT Road, Near MKS office,Nerul"
-                      }),
+                      }, context),
                     ],
                   ),
                   const SizedBox(height: 10.0),
@@ -73,11 +76,11 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                       ),
                       _buildInfoField({
                         "Drop At": "St. Vincent’s Hospital, A.J Road, Kurla"
-                      }),
+                      }, context),
                     ],
                   ),
                   const SizedBox(height: 20.0),
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
@@ -85,11 +88,14 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                         children: [
                           Text(
                             "Date And Time",
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: getResponsiveFontSize(16)),
                           ),
                           Text("20-07-2024 9:30:00",
                               style: TextStyle(
-                                  color: LTheme.primaryGreen, fontSize: 16))
+                                  color: LTheme.primaryGreen,
+                                  fontSize: getResponsiveFontSize(16)))
                         ],
                       ),
                       SizedBox(height: 8.0),
@@ -98,11 +104,14 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                         children: [
                           Text(
                             "Type",
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: getResponsiveFontSize(16)),
                           ),
                           Text("ECO",
                               style: TextStyle(
-                                  color: LTheme.primaryGreen, fontSize: 16))
+                                  color: LTheme.primaryGreen,
+                                  fontSize: getResponsiveFontSize(16)))
                         ],
                       ),
                       SizedBox(height: 8.0),
@@ -111,11 +120,14 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                         children: [
                           Text(
                             "Total Price",
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: getResponsiveFontSize(16)),
                           ),
                           Text("Rs. 1897.57",
                               style: TextStyle(
-                                  color: LTheme.primaryGreen, fontSize: 16))
+                                  color: LTheme.primaryGreen,
+                                  fontSize: getResponsiveFontSize(16)))
                         ],
                       ),
                       SizedBox(height: 8.0),
@@ -124,11 +136,14 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                         children: [
                           Text(
                             "Location",
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: getResponsiveFontSize(16)),
                           ),
                           Text("Mira Road",
                               style: TextStyle(
-                                  color: LTheme.primaryGreen, fontSize: 16))
+                                  color: LTheme.primaryGreen,
+                                  fontSize: getResponsiveFontSize(16)))
                         ],
                       ),
                       SizedBox(height: 40),
@@ -155,7 +170,7 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                               "ACCEPT",
                               style: GoogleFonts.inter(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: getResponsiveFontSize(17),
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,
                               ),
@@ -184,7 +199,7 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
                             "Cancel",
                             style: GoogleFonts.inter(
                               color: LTheme.primaryGreen,
-                              fontSize: 17,
+                              fontSize: getResponsiveFontSize(17),
                               fontWeight: FontWeight.w600,
                               fontStyle: FontStyle.normal,
                             ),
@@ -203,7 +218,9 @@ class _NearestAmbulanceState extends State<NearestAmbulance> {
   }
 }
 
-Widget _buildInfoField(Map<String, String> info) {
+Widget _buildInfoField(Map<String, String> info, BuildContext context) {
+  var GlobalWidth = MediaQuery.of(context).size.width;
+  var GlobalHeight = MediaQuery.of(context).size.height;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -216,7 +233,7 @@ Widget _buildInfoField(Map<String, String> info) {
       ),
       const SizedBox(height: 5.0),
       Container(
-        width: 300,
+        width: GlobalWidth * 0.75,
         height: 40.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),

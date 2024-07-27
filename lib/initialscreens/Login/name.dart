@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:smartambulance/initialscreens/Login/location.dart';
 
 class NameScreen extends StatefulWidget {
@@ -39,6 +40,10 @@ class _NameScreenState extends State<NameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double getResponsiveFontSize(double baseSize) {
+      return MediaQuery.of(context).size.width / 375 * baseSize;
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -66,10 +71,10 @@ class _NameScreenState extends State<NameScreen> {
                   Expanded(
                     child: Text(
                       '', // Empty header text
-                      style: TextStyle(
+                      style: GoogleFonts.inter(
                         color: Color(0xFF3A3A3A),
-                        fontFamily: 'Roboto',
-                        fontSize: 25.0, // Fixed font size
+
+                        fontSize: getResponsiveFontSize(25), // Fixed font size
                         fontWeight: FontWeight.w600,
                         letterSpacing: -0.41,
                         height: 1.1,
@@ -83,10 +88,10 @@ class _NameScreenState extends State<NameScreen> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
                   'Enter Your Details',
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     color: Color(0xFF3A3A3A),
-                    fontFamily: 'Roboto',
-                    fontSize: 25.0, // Fixed font size
+
+                    fontSize: getResponsiveFontSize(25), // Fixed font size
                     fontWeight: FontWeight.w600,
                     letterSpacing: -0.41,
                     height: 1.1,
@@ -98,9 +103,8 @@ class _NameScreenState extends State<NameScreen> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
                   'Please enter your details to proceed. The information will be used henceforth for communication purposes.',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16.0, // Fixed font size
+                  style: GoogleFonts.inter(
+                    fontSize: getResponsiveFontSize(16), // Fixed font size
                     color: Colors.grey,
                     letterSpacing: -0.41,
                     height: 1.4,
@@ -143,7 +147,7 @@ class _NameScreenState extends State<NameScreen> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           errorText: !_isPasswordValid
-                              ? 'Password must be at least 8 characters long, include a letter, a number, and a special character'
+                              ? 'Must include a special character , a number and must be 8 characters long'
                               : null,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),

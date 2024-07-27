@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smartambulance/initialscreens/Booking/nearestambulance.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:smartambulance/Home/Booking/nearestambulance.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class TimePrice extends StatefulWidget {
-  const TimePrice({super.key});
+  final VoidCallback onPrevPage;
+
+  TimePrice({required this.onPrevPage});
 
   @override
   State<TimePrice> createState() => _TimePriceState();
@@ -18,15 +21,24 @@ class _TimePriceState extends State<TimePrice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // backgroundColor: LTheme.sbgcolor,
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () => widget.onPrevPage(),
+          child: const Icon(
+            Icons.arrow_back_rounded,
+            color: LTheme.primaryGreen,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(0),
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
-            ),
             Expanded(child: CostList(onItemSelected: () {
               Future.delayed(Duration(seconds: 5), () {
+                Navigator.of(context).pop();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => NearestAmbulance()),
@@ -91,9 +103,15 @@ class _CostListState extends State<CostList> {
 
   @override
   Widget build(BuildContext context) {
+    var GlobalWidth = MediaQuery.of(context).size.width;
+    var GlobalHeight = MediaQuery.of(context).size.height;
+    double getResponsiveFontSize(double baseSize) {
+      return MediaQuery.of(context).size.width / 375 * baseSize;
+    }
+
     return SingleChildScrollView(
       child: Container(
-        height: 600,
+        height: GlobalHeight * 0.8,
         child: ListView.builder(
           itemCount: items.length,
           itemBuilder: (context, index) {
@@ -108,10 +126,31 @@ class _CostListState extends State<CostList> {
                 setState(() {
                   _selectedValue = value!;
                 });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                      content: Text('Searching for the Nearest Ambulance')),
-                );
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Center(
+                          child: Container(
+                        height: 300,
+                        width: 300,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Searching for the Nearest Ambulance...",
+                                maxLines: 3,
+                                style: GoogleFonts.inter(
+                                    fontSize: getResponsiveFontSize(22),
+                                    color: Colors.white)),
+                            SizedBox(height: 30),
+                            CircularProgressIndicator(color: Colors.white),
+                          ],
+                        ),
+                      ));
+                    });
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   SnackBar(
+                //       content: Text('Searching for the Nearest Ambulance')),
+                // );
                 widget.onItemSelected();
               },
             );

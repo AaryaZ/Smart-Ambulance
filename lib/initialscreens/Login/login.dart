@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'name.dart'; // Import the name.dart file
 
@@ -12,6 +13,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double getResponsiveFontSize(double baseSize) {
+      return MediaQuery.of(context).size.width / 375 * baseSize;
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -27,19 +32,15 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: screenHeight * 0.04),
-
-              // Removed back button
-
               SizedBox(height: screenHeight * 0.1),
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
-                  'Enter Phone number for verification',
-                  style: TextStyle(
+                  'Enter phone number for verification',
+                  style: GoogleFonts.inter(
                     color: Color(0xFF3A3A3A),
-                    fontFamily: 'Roboto',
-                    fontSize: 25.0, // Fixed font size
+
+                    fontSize: getResponsiveFontSize(25), // Fixed font size
                     fontWeight: FontWeight.w600,
                     letterSpacing: -0.41,
                     height: 1.1,
@@ -47,14 +48,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: screenHeight * 0.015),
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
                   'This number will be used for all kinds of communications. You shall receive an SMS with code for verifications.',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16.0, // Fixed font size
+                  style: GoogleFonts.inter(
+                    fontSize: getResponsiveFontSize(16), // Fixed font size
                     color: Colors.grey,
                     letterSpacing: -0.41,
                     height: 1.4,
@@ -62,7 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: screenHeight * 0.1),
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: IntlPhoneField(
@@ -88,7 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: screenHeight * 0.18),
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(

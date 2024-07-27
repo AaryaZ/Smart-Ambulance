@@ -4,13 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class Asize extends StatefulWidget {
-  const Asize({super.key});
+  final VoidCallback onNextPage;
+
+  final VoidCallback onPrevPage;
+
+  Asize({required this.onNextPage, required this.onPrevPage});
 
   @override
   State<Asize> createState() => _AsizeState();
 }
 
 class _AsizeState extends State<Asize> {
+  String asizeSelected = "";
   bool _isLExpanded = false;
   bool _isSExpanded = false;
   bool _isMExpanded = false;
@@ -32,22 +37,37 @@ class _AsizeState extends State<Asize> {
   }
 
   int h = 0;
+  double getResponsiveFontSize(double baseSize) {
+    return MediaQuery.of(context).size.width / 375 * baseSize;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // backgroundColor: LTheme.sbgcolor,
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () => widget.onPrevPage(),
+          child: const Icon(
+            Icons.arrow_back_rounded,
+            color: LTheme.primaryGreen,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 150,
+              height: 30,
             ),
             Text(
               "Ambulance Size",
               style: TextStyle(
                   color: LTheme.primaryGreen,
-                  fontSize: 25,
+                  fontSize: getResponsiveFontSize(25),
                   fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -57,9 +77,9 @@ class _AsizeState extends State<Asize> {
                 height: (updateH() == 3)
                     ? 455
                     : (updateH() == 2)
-                        ? 365
+                        ? 395
                         : (updateH() == 1)
-                            ? 290
+                            ? 310
                             : 210,
                 decoration: BoxDecoration(
                   color: LTheme.lightGreen,
@@ -71,8 +91,9 @@ class _AsizeState extends State<Asize> {
                     ExpansionTile(
                       title: Text(
                         'Large',
-                        style:
-                            TextStyle(color: LTheme.primaryGreen, fontSize: 20),
+                        style: TextStyle(
+                            color: LTheme.primaryGreen,
+                            fontSize: getResponsiveFontSize(20)),
                       ),
                       trailing: _isLExpanded
                           ? Icon(Icons.remove, color: LTheme.primaryGreen)
@@ -86,17 +107,20 @@ class _AsizeState extends State<Asize> {
                               FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
-                                    "Capacity of 3 people,\n Equipments include BLS,\n Oxygen Cylinder with mask,First Aid Kit,\n Suction Machine",
+                                    "Capacity of 3 people,\n Equipments include BLS,\n Oxygen Cylinder with mask,\n First Aid Kit,\n Suction Machine",
                                     style: TextStyle(
-                                        color: Colors.black45, fontSize: 13)),
+                                        color: Colors.black45,
+                                        fontSize: getResponsiveFontSize(12))),
                               ),
-                              SizedBox(width: 20),
                               Column(
                                 children: [
                                   Image.asset("assets/home/Large.png"),
                                   SizedBox(height: 10),
                                   GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        asizeSelected = "Large";
+                                        widget.onNextPage();
+                                      },
                                       child: Container(
                                         height: 30,
                                         width: 80,
@@ -110,7 +134,7 @@ class _AsizeState extends State<Asize> {
                                           "SELECT",
                                           style: GoogleFonts.inter(
                                             color: Colors.white,
-                                            fontSize: 12,
+                                            fontSize: getResponsiveFontSize(12),
                                             fontWeight: FontWeight.w600,
                                             fontStyle: FontStyle.normal,
                                           ),
@@ -138,8 +162,9 @@ class _AsizeState extends State<Asize> {
                     ExpansionTile(
                       title: Text(
                         'Medium',
-                        style:
-                            TextStyle(color: LTheme.primaryGreen, fontSize: 20),
+                        style: TextStyle(
+                            color: LTheme.primaryGreen,
+                            fontSize: getResponsiveFontSize(20)),
                       ),
                       trailing: _isMExpanded
                           ? Icon(Icons.remove, color: LTheme.primaryGreen)
@@ -153,9 +178,10 @@ class _AsizeState extends State<Asize> {
                               FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
-                                    "Capacity of 3 people,\n Equipments include BLS,\n Oxygen Cylinder with mask,First Aid Kit,\n Suction Machine",
+                                    "Capacity of 3 people,\n Equipments include BLS,\n Oxygen Cylinder with mask,\n First Aid Kit,\n Suction Machine",
                                     style: TextStyle(
-                                        color: Colors.black45, fontSize: 13)),
+                                        color: Colors.black45,
+                                        fontSize: getResponsiveFontSize(12))),
                               ),
                               SizedBox(width: 20),
                               Column(
@@ -163,7 +189,10 @@ class _AsizeState extends State<Asize> {
                                   Image.asset("assets/home/Medium.png"),
                                   SizedBox(height: 10),
                                   GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        asizeSelected = "Medium";
+                                        widget.onNextPage();
+                                      },
                                       child: Container(
                                         height: 30,
                                         width: 80,
@@ -177,7 +206,7 @@ class _AsizeState extends State<Asize> {
                                           "SELECT",
                                           style: GoogleFonts.inter(
                                             color: Colors.white,
-                                            fontSize: 12,
+                                            fontSize: getResponsiveFontSize(12),
                                             fontWeight: FontWeight.w600,
                                             fontStyle: FontStyle.normal,
                                           ),
@@ -205,8 +234,9 @@ class _AsizeState extends State<Asize> {
                     ExpansionTile(
                       title: Text(
                         'ECO',
-                        style:
-                            TextStyle(color: LTheme.primaryGreen, fontSize: 20),
+                        style: TextStyle(
+                            color: LTheme.primaryGreen,
+                            fontSize: getResponsiveFontSize(20)),
                       ),
                       trailing: _isSExpanded
                           ? Icon(Icons.remove, color: LTheme.primaryGreen)
@@ -220,17 +250,20 @@ class _AsizeState extends State<Asize> {
                               FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
-                                    "Capacity of 3 people,\n Equipments include BLS,\n Oxygen Cylinder with mask,First Aid Kit,\n Suction Machine",
+                                    "Capacity of 3 people,\n Equipments include BLS,\n Oxygen Cylinder with mask,\n First Aid Kit,\n Suction Machine",
                                     style: TextStyle(
-                                        color: Colors.black45, fontSize: 13)),
+                                        color: Colors.black45,
+                                        fontSize: getResponsiveFontSize(12))),
                               ),
-                              SizedBox(width: 20),
                               Column(
                                 children: [
                                   Image.asset("assets/home/Eco.png"),
                                   SizedBox(height: 10),
                                   GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        asizeSelected = "Eco";
+                                        widget.onNextPage();
+                                      },
                                       child: Container(
                                         height: 30,
                                         width: 80,
@@ -244,7 +277,7 @@ class _AsizeState extends State<Asize> {
                                           "SELECT",
                                           style: GoogleFonts.inter(
                                             color: Colors.white,
-                                            fontSize: 12,
+                                            fontSize: getResponsiveFontSize(12),
                                             fontWeight: FontWeight.w600,
                                             fontStyle: FontStyle.normal,
                                           ),

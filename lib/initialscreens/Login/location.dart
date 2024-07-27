@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:smartambulance/initialscreens/Login/otp_verification_screen.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -71,6 +72,10 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
+    double getResponsiveFontSize(double baseSize) {
+      return MediaQuery.of(context).size.width / 375 * baseSize;
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -97,10 +102,10 @@ class _LocationState extends State<Location> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
                   'Enter Your Location',
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     color: Color(0xFF3A3A3A),
-                    fontFamily: 'Roboto',
-                    fontSize: 25.0, // Fixed font size
+
+                    fontSize: getResponsiveFontSize(25), // Fixed font size
                     fontWeight: FontWeight.w600,
                     letterSpacing: -0.41,
                     height: 1.1,
@@ -112,9 +117,8 @@ class _LocationState extends State<Location> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Text(
                   "Please share your location with us. This information is crucial for providing accurate and relevant services.",
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 16.0, // Fixed font size
+                  style: GoogleFonts.inter(
+                    fontSize: getResponsiveFontSize(16), // Fixed font size
                     color: Colors.grey,
                     letterSpacing: -0.41,
                     height: 1.4,
@@ -163,8 +167,7 @@ class _LocationState extends State<Location> {
                   ),
                   child: Text(
                     'NEXT',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
+                    style: GoogleFonts.inter(
                       fontSize: 16.0, // Fixed font size
                       color: Colors.white,
                       fontWeight: FontWeight.w600,

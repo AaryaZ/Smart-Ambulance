@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smartambulance/initialscreens/Home/history.dart';
-import 'package:smartambulance/initialscreens/Home/home.dart';
-import 'package:smartambulance/initialscreens/Home/profile.dart';
+import 'package:smartambulance/History/history.dart';
+import 'package:smartambulance/Home/home.dart';
+import 'package:smartambulance/Profile/profile.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class BottomNav extends StatefulWidget {
@@ -31,6 +31,7 @@ class _BottomNavState extends State<BottomNav> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: LTheme.sbgcolor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartambulance/initialscreens/Home/editprofile.dart';
+import 'package:smartambulance/Profile/editprofile.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class Profile extends StatefulWidget {
@@ -21,6 +21,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     var GlobalWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: LTheme.sbgcolor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 18),
         child: Column(

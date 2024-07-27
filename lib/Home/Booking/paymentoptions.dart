@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartambulance/initialscreens/Booking/razorpay.dart';
+import 'package:smartambulance/Home/Booking/razorpay.dart';
 import 'package:smartambulance/themes/theme.dart';
 
 class Paymentoptions extends StatefulWidget {
@@ -12,6 +12,10 @@ class Paymentoptions extends StatefulWidget {
 }
 
 class _PaymentoptionsState extends State<Paymentoptions> {
+  double getResponsiveFontSize(double baseSize) {
+    return MediaQuery.of(context).size.width / 375 * baseSize;
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -40,9 +44,9 @@ class _PaymentoptionsState extends State<Paymentoptions> {
             ),
             Text(
               "Payment Options",
-              style: TextStyle(
+              style: GoogleFonts.inter(
                   color: LTheme.primaryGreen,
-                  fontSize: 22,
+                  fontSize: getResponsiveFontSize(22),
                   fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20),
@@ -64,7 +68,15 @@ class _PaymentoptionsState extends State<Paymentoptions> {
                           color: LTheme.primaryGreen,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.6),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -93,7 +105,15 @@ class _PaymentoptionsState extends State<Paymentoptions> {
                           color: LTheme.primaryGreen,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.6),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
